@@ -1,0 +1,38 @@
+<div *ngIf="data.notificationType == 'success'" class="notifier-container notifier-container-success" fxLayout="row"
+  fxLayoutAlign="space-between center" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+    <img style="height: 18px; width: 18px" src="../../../../assets/images/logo/check_fill.png" alt="">
+    <p class="notifier-text-success">{{data.message}}</p>
+  </div>
+  <div *ngIf="data.needDismissBtn">
+    <button mat-icon-button (click)="snackBarRef.dismiss()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="data.notificationType == 'failure'" class="notifier-container notifier-container-failure" fxLayout="row"
+  fxLayoutAlign="space-between center" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+    <img style="height: 18px; width: 18px" src="../../../../assets/images/logo/failure_circle.png" alt="">
+    <p class="notifier-text-failure">{{data.message}}</p>
+  </div>
+  <div *ngIf="data.needDismissBtn">
+    <button mat-icon-button (click)="snackBarRef.dismiss()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</div>
+
+<div *ngIf="data.notificationType == 'warning'" class="notifier-container notifier-container-warning" fxLayout="row"
+  fxLayoutAlign="space-between center" fxLayoutGap="10px">
+  <div fxLayout="row" fxLayoutGap="16px" fxLayoutAlign="start center">
+    <img style="height: 18px; width: 18px" src="../../../../assets/images/logo/caution 1.svg" alt="">
+    <p class="notifier-text-warning">{{data.message}}</p>
+  </div>
+  <div *ngIf="data.needDismissBtn">
+    <button mat-icon-button (click)="snackBarRef.dismiss()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+</div>

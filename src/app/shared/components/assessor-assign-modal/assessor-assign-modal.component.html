@@ -1,0 +1,117 @@
+<div>
+	<div class="modal-header" fxLayout="row" fxLayoutAlign="space-between center">
+		<div class="modal-title">Assign to</div>
+		<mat-icon class="cursor-pointer" (click)="onClose()">close</mat-icon>
+	</div>
+	<div class="modal-body" fxLayout="column" fxLayoutGap="20px">
+		<div fxLayout="column" fxLayoutGap="10px">
+			<mat-form-field appearance="outline">
+				<mat-label>Search by name</mat-label>
+				<input type="text" autocomplete="off" matInput [formControl]="searchFormControl" />
+
+				<div matSuffix fxLayout="row" fxLayoutAlign="end center">
+					<mat-icon *ngIf="!searchFormControl.value" matSuffix>search</mat-icon>
+					<mat-icon *ngIf="searchFormControl.value" class="cursor-pointer" matSuffix (click)="clearSearchField()">
+						close
+					</mat-icon>
+				</div>
+			</mat-form-field>
+
+			<mat-form-field appearance="outline" class="region-field">
+				<mat-label>Select Region</mat-label>
+				<mat-select placeholder="Select Region" (selectionChange)="onRegionSelect($event)" [disabled]="!isGetRegionList">
+					<mat-option *ngFor="let region of regions" [value]="region"> {{ region }}</mat-option>
+				</mat-select>
+				<mat-spinner *ngIf="!isGetRegionList" diameter="30" color="accent" class="centered-spinner"></mat-spinner>
+			</mat-form-field>
+
+			<mat-form-field appearance="outline" class="role-field">
+				<mat-label>Select Role</mat-label>
+				<mat-select
+					placeholder="Select Affiliated Role"
+					[disabled]="!selectedRegion"
+					(selectionChange)="onRoleSelect($event)"
+					[formControl]="roleFormControl"
+				>
+					<mat-option *ngFor="let role of availableRoles" [value]="role.Key"> {{ role.Title }}</mat-option>
+				</mat-select>
+				<mat-spinner
+					*ngIf="selectedRegion && !isGetRegionSpecificRoleList"
+					diameter="30"
+					color="accent"
+					class="centered-spinner"
+				></mat-spinner>
+			</mat-form-field>
+		</div>
+
+		<div fxLayout="row" id="user-chip">
+			<mat-chip-list #chipList>
+				<mat-chip *ngFor="let user of assessors" fxLayout="row" fxLayoutGap="8px">
+					<img *ngIf="user.ProfileImageUrl" [src]="user.ProfileImageUrl" alt="" class="round-image" />
+					<ngx-avatar *ngIf="!user.ProfileImageUrl" name="{{ user.DisplayName }}" size="18"> </ngx-avatar>
+					<div class="user-display-name">{{ user.DisplayName }}</div>
+					<mat-icon class="cursor-pointer" color="primary" (click)="removeUser(user)">cancel</mat-icon>
+				</mat-chip>
+			</mat-chip-list>
+		</div>
+
+		<div class="user-list-container" fxLayout="column" fxLayoutGap="18px">
+			<div class="user-list-title">User List</div>
+			<div
+				*ngIf="!isUserListLoading"
+				class="user-list"
+				fxLayout="column"
+				fxLayoutGap="6px"
+				infiniteScroll
+				[infiniteScrollDistance]="9"
+				[infiniteScrollThrottle]="150"
+				(scrolled)="onScrollDown()"
+				[scrollWindow]="false"
+			>
+				<ng-container *ngFor="let user of availableUsers">
+					<div
+						*ngIf="user != 'loading'"
+						class="cursor-pointer"
+						fxLayout="row"
+						fxFlex="100%"
+						fxLayoutAlign="space-between center"
+						(click)="selectUser(user)"
+					>
+						<div fxLayout="row" fxLayoutGap="12px">
+							<img *ngIf="user.ProfileImageUrl" [src]="user.ProfileImageUrl" alt="" class="large-round-image" />
+							<ngx-avatar *ngIf="!user.ProfileImageUrl" name="{{ user.DisplayName }}" size="32"> </ngx-avatar>
+							<div fxLayout="column">
+								<div class="user-name">{{ user.DisplayName || '-' }}</div>
+								<div class="user-role">{{ user.Designation || '-' }}</div>
+							</div>
+						</div>
+						<mat-icon *ngIf="user.IsSelected" fxLayoutAlign="center center" color="primary">done</mat-icon>
+					</div>
+					<div fxLayout fxLayoutAlign="center center" *ngIf="user == 'loading' && isNewUserListLoading">
+						<mat-spinner diameter="24" color="primary"></mat-spinner>
+					</div>
+				</ng-container>
+				<div fxLayout="row" fxFlex="100%" fxLayoutAlign="center center" *ngIf="availableUsers.length <= 0">
+					No User Found
+				</div>
+			</div>
+			<mat-spinner *ngIf="isUserListLoading" diameter="24" color="primary"></mat-spinner>
+		</div>
+	</div>
+
+	<div class="p-12 modal-footer" fxLayout="row" fxLayoutAlign="space-between center">
+		<button mat-button class="cancel-btn" (click)="onClose()">
+			<span class="cancel-btn-text">Cancel</span>
+		</button>
+		<button
+			mat-button
+			class="assign-btn"
+			[ngClass]="assessors.length && !assignClicked ? 'assign-btn-enabled' : 'assign-btn-disabled'"
+			[disabled]="!assessors.length || assignClicked"
+			(click)="onAssign()"
+		>
+			<span class="assign-btn-text">Assign</span>
+			<mat-spinner *ngIf="assignClicked" diameter="30" color="accent" class="centered-spinner"></mat-spinner>
+		</button>
+	</div>
+</div>

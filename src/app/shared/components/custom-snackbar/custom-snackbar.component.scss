@@ -1,0 +1,50 @@
+@import "../../../../style/themes/tenant-variable.scss";
+
+.notifier-container {
+  min-width: 520px !important;
+  height: 62px;
+  border-radius: 4px;
+  padding: 21px;
+}
+
+.notifier-container-success {
+  background-color: $primary-50;
+  border: 1px solid $status-success;
+  mat-icon {
+    color: $status-success;
+  }
+}
+
+.notifier-container-failure {
+  background-color: #f6c3c3;
+  border: 1px solid $status-error;
+  mat-icon {
+    color: $status-error;
+  }
+}
+
+.notifier-container-warning {
+  background: rgba(255, 192, 72, 0.55);
+  border: 1px solid #e99313;
+  mat-icon {
+    color: $status-warning;
+  }
+}
+
+.notifier-text-success {
+  font-size: 14px;
+  font-weight: 600;
+  color: $status-success;
+}
+
+.notifier-text-failure {
+  font-size: 14px;
+  font-weight: 600;
+  color: $status-error;
+}
+
+.notifier-text-warning {
+  font-size: 14px;
+  font-weight: 600;
+  color: #e99313;
+}

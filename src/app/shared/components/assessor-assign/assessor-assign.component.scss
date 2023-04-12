@@ -1,0 +1,143 @@
+@import '../../../../style/themes/tenant-variable.scss';
+
+.modal-header {
+	padding: 24px;
+	.modal-title {
+		font-weight: 700;
+		font-size: 18px;
+		line-height: 125%;
+		letter-spacing: -0.02em;
+		color: $text-N900;
+	}
+}
+
+.modal-body {
+	padding: 0px 24px;
+	.region-field,
+	.role-field {
+		position: relative;
+		.centered-spinner {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+	mat-form-field {
+		font-size: 10.76px;
+	}
+	#user-chip {
+		.round-image {
+			width: 18px;
+			height: 18px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+		.user-display-name {
+			font-style: normal;
+			font-weight: 400;
+			font-size: 10px;
+			line-height: 140%;
+			letter-spacing: 0.02em;
+			color: $primary-500;
+		}
+		mat-icon {
+			font-size: 18px;
+			width: 18px;
+			height: 18px;
+		}
+	}
+	.user-list-container {
+		.user-list-title {
+			font-style: normal;
+			font-weight: 600;
+			font-size: 14px;
+			line-height: 140%;
+			color: $primary-700;
+		}
+		.user-list {
+			max-height: 100px;
+			overflow: auto;
+			mat-icon {
+				font-size: 14px;
+			}
+		}
+		.user-name {
+			font-style: normal;
+			font-weight: 600;
+			font-size: 14px;
+			line-height: 140%;
+			color: $text-N900;
+		}
+		.user-role {
+			font-style: normal;
+			font-weight: 400;
+			font-size: 10px;
+			line-height: 140%;
+			color: $text-N700;
+		}
+		.large-round-image {
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			object-fit: cover;
+		}
+	}
+}
+
+.modal-footer {
+	.cancel-btn {
+		height: 36px;
+		.cancel-btn-text {
+			color: $primary-500;
+			font-weight: 600;
+			line-height: 125%;
+			letter-spacing: 0.01em;
+		}
+	}
+	.assign-btn {
+		height: 36px;
+		border-radius: 4px;
+		.assign-btn-text {
+			font-weight: 600;
+			line-height: 125%;
+			letter-spacing: 0.01em;
+		}
+		.centered-spinner {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+	.assign-btn-enabled {
+		background: $primary-500;
+		.assign-btn-text {
+			color: $text-N50;
+		}
+	}
+	.assign-btn-disabled {
+		background: $text-N200;
+		.assign-btn-text {
+			color: $text-N500;
+		}
+	}
+}
+
+:host::ng-deep {
+	.mat-form-field-wrapper {
+		padding-bottom: 0;
+	}
+	.mat-form-field-appearance-outline .mat-form-field-wrapper {
+		margin: 0;
+	}
+	.mat-chip.mat-standard-chip {
+		background-color: transparent;
+		border: 1px solid $primary-500;
+		padding: 4px;
+	}
+	.mat-button-wrapper {
+		display: flex;
+		align-items: center;
+	}
+}

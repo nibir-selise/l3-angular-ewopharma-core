@@ -1,0 +1,36 @@
+<div class="dialog-content-wrapper">
+	<mat-toolbar matDialogTitle class="m-0" color="primary">
+		<div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+			<div>
+				<p>Alert</p>
+			</div>
+			<button
+				mat-icon-button
+				class="cursor-pointer"
+				[disableRipple]="true"
+				(click)="choose(false)"
+				aria-label="Close Dialog"
+				matTooltip="CLOSE DIALOG"
+				matTooltipPosition="above"
+			>
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+	</mat-toolbar>
+	<div fxLayout="row wrap" fxLayoutAlign="center center">
+		<div fxFlex class="mx-40 my-24">Do you want to continue without saving?</div>
+	</div>
+	<div class="m-0 p-0">
+		<mat-divider class="m-0" [inset]="true"></mat-divider>
+	</div>
+	<div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="space-between center float-sm-right">
+		<button mat-raised-button class="primary-A100 cursor-pointer delta-button" (click)="choose(true)" aria-label="Cancel">
+			{{ 'YES' | translate }}
+		</button>
+		<div>
+			<button mat-raised-button class="primary-500 cursor-pointer delta-button" (click)="choose(false)">
+				NO
+			</button>
+		</div>
+	</div>
+</div>
