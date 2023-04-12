@@ -60,14 +60,14 @@ export function HttpLoaderFactory(http: HttpClient) {
 			],
 		}),
 		HttpClientModule,
-		// TranslateModule.forRoot({
-		// 	loader: {
-		// 		provide: TranslateLoader,
-		// 		useFactory: HttpLoaderFactory,
-		// 		deps: [HttpClient],
-		// 	},
-		// 	isolate: true,
-		// }),
+		TranslateModule.forRoot({
+			loader: {
+				provide: TranslateLoader,
+				useFactory: HttpLoaderFactory,
+				deps: [HttpClient],
+			},
+			isolate: true,
+		}),
 		MatButtonModule,
 		MatIconModule,
 		MatDatepickerModule,
